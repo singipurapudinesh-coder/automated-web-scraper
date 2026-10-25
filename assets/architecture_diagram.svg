@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 620" width="1050" height="620">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17" />
+      <stop offset="50%" stop-color="#101726" />
+      <stop offset="100%" stop-color="#0a0e17" />
+    </linearGradient>
+
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+
+    <linearGradient id="accentEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="accentAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+
+    <!-- Marker Arrow -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1050" height="620" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Subtle Grid Pattern -->
+  <g opacity="0.07">
+    <path d="M 0 70 L 1050 70 M 0 140 L 1050 140 M 0 210 L 1050 210 M 0 280 L 1050 280 M 0 350 L 1050 350 M 0 420 L 1050 420 M 0 490 L 1050 490 M 0 560 L 1050 560" stroke="#94a3b8" stroke-width="1" />
+    <path d="M 70 0 L 70 620 M 140 0 L 140 620 M 210 0 L 210 620 M 280 0 L 280 620 M 350 0 L 350 620 M 420 0 L 420 620 M 490 0 L 490 620 M 560 0 L 560 620 M 630 0 L 630 620 M 700 0 L 700 620 M 770 0 L 770 620 M 840 0 L 840 620 M 910 0 L 910 620 M 980 0 L 980 620" stroke="#94a3b8" stroke-width="1" />
+  </g>
+
+  <!-- Header Section -->
+  <g transform="translate(50, 40)">
+    <rect x="0" y="0" width="36" height="36" rx="8" fill="#38bdf8" opacity="0.15" />
+    <text x="18" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#38bdf8" text-anchor="middle">⚡</text>
+    <text x="48" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="-0.5">Automated Web Scraper Architecture</text>
+    <text x="48" y="46" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400" fill="#94a3b8">End-to-End Dynamic Web Scraping, Periodic Scheduling, SQLite Persistence &amp; Multi-Format Export</text>
+  </g>
+
+  <!-- Flow Paths / Connecting Lines -->
+  <!-- Scheduler -> Browser Engine -->
+  <path d="M 270 210 L 350 210" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrow)" fill="none" />
+  
+  <!-- Browser Engine -> Parser -->
+  <path d="M 570 210 L 640 210" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrowPurple)" fill="none" />
+
+  <!-- Parser -> Deduplication/SQLite -->
+  <path d="M 760 280 L 760 370 L 600 370" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrowEmerald)" fill="none" />
+
+  <!-- SQLite -> Export -->
+  <path d="M 360 440 L 270 440" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrow)" fill="none" />
+
+  <!-- Target Websites -> Browser Engine -->
+  <path d="M 460 95 L 460 140" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+
+  <!-- ==================== BOX 0: Target Websites ==================== -->
+  <g transform="translate(350, 48)" filter="url(#shadow)">
+    <rect width="220" height="48" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+    <text x="110" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#f1f5f9" text-anchor="middle">DYNAMIC TARGET WEBSITES</text>
+    <text x="110" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">SPAs • Infinite Scroll • AJAX • JavaScript DOM</text>
+  </g>
+
+  <!-- ==================== BOX 1: Scheduling Layer ==================== -->
+  <g transform="translate(50, 140)" filter="url(#shadow)">
+    <rect width="220" height="150" rx="12" fill="url(#blueCard)" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="105" height="20" rx="4" fill="#0284c7" opacity="0.2" />
+    <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">SCHEDULING LAYER</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Dual Scheduler</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#38bdf8" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Celery Beat + Redis</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Distributed task queue</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#38bdf8" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Standalone Scheduler</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Local cron/interval loop</text>
+  </g>
+
+  <!-- ==================== BOX 2: Browser Engine ==================== -->
+  <g transform="translate(350, 140)" filter="url(#shadow)">
+    <rect width="220" height="150" rx="12" fill="url(#blueCard)" stroke="#60a5fa" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="115" height="20" rx="4" fill="#2563eb" opacity="0.2" />
+    <text x="71" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#60a5fa" text-anchor="middle">BROWSER ENGINE</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Selenium Headless</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#60a5fa" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Chrome / Selenium Manager</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">CDP Anti-detection &amp; Stealth</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#60a5fa" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Explicit Waits &amp; Scrolling</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">WebDriverWait + Auto-Scroll</text>
+  </g>
+
+  <!-- ==================== BOX 3: Parsing & Extraction ==================== -->
+  <g transform="translate(650, 140)" filter="url(#shadow)">
+    <rect width="230" height="150" rx="12" fill="url(#blueCard)" stroke="#a855f7" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="120" height="20" rx="4" fill="#7c3aed" opacity="0.2" />
+    <text x="74" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#c084fc" text-anchor="middle">PARSER &amp; EXTRACTION</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">BeautifulSoup4 (lxml)</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#c084fc" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">High-Speed DOM Parsing</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Zero WebDriver IPC latency</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#c084fc" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">CSS / XPath Selectors</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Config-driven generic rules</text>
+  </g>
+
+  <!-- ==================== BOX 4: Database & Storage ==================== -->
+  <g transform="translate(360, 360)" filter="url(#shadow)">
+    <rect width="240" height="170" rx="12" fill="url(#blueCard)" stroke="#34d399" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="115" height="20" rx="4" fill="#059669" opacity="0.2" />
+    <text x="71" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">STORAGE &amp; DEDUP</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">SQLite Database</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#34d399" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Deterministic Deduplication</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">SHA-256 item payload hash</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#34d399" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Relational Audit History</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">jobs • scrape_runs • scraped_items</text>
+
+    <!-- Item 3 -->
+    <circle cx="24" cy="148" r="3" fill="#34d399" />
+    <text x="34" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">ACID Transactions</text>
+  </g>
+
+  <!-- ==================== BOX 5: Export Pipeline ==================== -->
+  <g transform="translate(50, 360)" filter="url(#shadow)">
+    <rect width="220" height="170" rx="12" fill="url(#blueCard)" stroke="#fbbf24" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="105" height="20" rx="4" fill="#d97706" opacity="0.2" />
+    <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#fbbf24" text-anchor="middle">EXPORT PIPELINE</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Multi-Format Exporter</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#fbbf24" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">CSV Export (Tabular)</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Flattens nested lists/tags via Pandas</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#fbbf24" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">JSON / JSONL Export</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">Complete structured schema</text>
+
+    <!-- Item 3 -->
+    <circle cx="24" cy="148" r="3" fill="#fbbf24" />
+    <text x="34" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">CLI &amp; Automated Hooks</text>
+  </g>
+
+  <!-- ==================== BOX 6: CLI & Management ==================== -->
+  <g transform="translate(650, 360)" filter="url(#shadow)">
+    <rect width="230" height="170" rx="12" fill="url(#blueCard)" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Header Badge -->
+    <rect x="14" y="14" width="115" height="20" rx="4" fill="#0284c7" opacity="0.2" />
+    <text x="71" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">CLI &amp; MONITORING</text>
+    
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Unified Control</text>
+    
+    <!-- Item 1 -->
+    <circle cx="24" cy="80" r="3" fill="#38bdf8" />
+    <text x="34" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Job Operations</text>
+    <text x="34" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">init • add-job • run • list-jobs</text>
+
+    <!-- Item 2 -->
+    <circle cx="24" cy="116" r="3" fill="#38bdf8" />
+    <text x="34" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Data &amp; Health Insights</text>
+    <text x="34" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">stats • view-data • export</text>
+
+    <!-- Item 3 -->
+    <circle cx="24" cy="148" r="3" fill="#38bdf8" />
+    <text x="34" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#e2e8f0">Process Management</text>
+    <text x="34" y="161" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#94a3b8">worker • beat • schedule</text>
+  </g>
+
+  <!-- Footer Banner -->
+  <g transform="translate(50, 565)">
+    <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#64748b">Tech Stack: Python 3.10+ • Selenium 4 • BeautifulSoup4 • Celery 5 • SQLite3 • Pandas • Click</text>
+    <text x="950" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#38bdf8" text-anchor="end">Enterprise Dynamic Web Scraping</text>
+  </g>
+</svg>

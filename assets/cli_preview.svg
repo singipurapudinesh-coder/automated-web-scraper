@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="850" height="440">
+  <defs>
+    <filter id="terminalShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Terminal Window Background -->
+  <rect x="25" y="20" width="800" height="400" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5" filter="url(#terminalShadow)" />
+
+  <!-- Window Header Bar -->
+  <path d="M 25 30 A 10 10 0 0 1 35 20 L 815 20 A 10 10 0 0 1 825 30 L 825 55 L 25 55 Z" fill="#1e293b" />
+  
+  <!-- Window Controls -->
+  <circle cx="45" cy="38" r="6" fill="#ef4444" />
+  <circle cx="65" cy="38" r="6" fill="#f59e0b" />
+  <circle cx="85" cy="38" r="6" fill="#10b981" />
+  
+  <!-- Window Title -->
+  <text x="425" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', monospace" font-size="12" fill="#94a3b8" text-anchor="middle">PowerShell — automated_web_scraper</text>
+
+  <!-- Terminal Body Content -->
+  <g font-family="'Cascadia Code', Consolas, 'Fira Code', monospace" font-size="12">
+    <!-- Prompt 1 -->
+    <text x="45" y="85" fill="#38bdf8" font-weight="bold">PS C:\scraper&gt; </text>
+    <text x="175" y="85" fill="#f8fafc">python cli.py list-jobs</text>
+
+    <!-- Output Table -->
+    <text x="45" y="110" fill="#64748b">+------+---------------+-----------+------------+-----------+---------+------------+---------------------------------+</text>
+    <text x="45" y="125" fill="#f8fafc"><tspan fill="#64748b">| </tspan><tspan fill="#38bdf8">  ID </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">Name          </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">Type      </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">Schedule   </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">Enabled   </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">  Items </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">Last Run   </tspan><tspan fill="#64748b">| </tspan><tspan fill="#f1f5f9">URL                             </tspan><tspan fill="#64748b">|</tspan></text>
+    <text x="45" y="140" fill="#64748b">+======+===============+===========+============+===========+=========+============+=================================+</text>
+    <text x="45" y="155" fill="#f8fafc"><tspan fill="#64748b">| </tspan>   1 <tspan fill="#64748b">| </tspan>quotes_sample <tspan fill="#64748b">| </tspan>quotes    <tspan fill="#64748b">| </tspan>Every 30m  <tspan fill="#64748b">| </tspan><tspan fill="#34d399">Yes       </tspan><tspan fill="#64748b">| </tspan>     10 <tspan fill="#64748b">| </tspan><tspan fill="#34d399">success    </tspan><tspan fill="#64748b">| </tspan>https://quotes.toscrape.com/js/ <tspan fill="#64748b">|</tspan></text>
+    <text x="45" y="170" fill="#64748b">+------+---------------+-----------+------------+-----------+---------+------------+---------------------------------+</text>
+    <text x="45" y="185" fill="#f8fafc"><tspan fill="#64748b">| </tspan>   2 <tspan fill="#64748b">| </tspan>books_sample  <tspan fill="#64748b">| </tspan>ecommerce <tspan fill="#64748b">| </tspan>Every 60m  <tspan fill="#64748b">| </tspan><tspan fill="#34d399">Yes       </tspan><tspan fill="#64748b">| </tspan>     20 <tspan fill="#64748b">| </tspan><tspan fill="#34d399">success    </tspan><tspan fill="#64748b">| </tspan>https://books.toscrape.com/     <tspan fill="#64748b">|</tspan></text>
+    <text x="45" y="200" fill="#64748b">+------+---------------+-----------+------------+-----------+---------+------------+---------------------------------+</text>
+
+    <!-- Prompt 2 -->
+    <text x="45" y="235" fill="#38bdf8" font-weight="bold">PS C:\scraper&gt; </text>
+    <text x="175" y="235" fill="#f8fafc">python cli.py stats --job quotes_sample</text>
+
+    <text x="45" y="260" fill="#38bdf8" font-weight="bold">--- Statistics for Job: quotes_sample (ID: 1) ---</text>
+    <text x="45" y="280" fill="#e2e8f0">  * Total Unique Items Stored : <tspan fill="#34d399" font-weight="bold">10</tspan></text>
+    <text x="45" y="298" fill="#e2e8f0">  * Total Scrape Runs         : 1</text>
+    <text x="45" y="316" fill="#e2e8f0">  * Successful Runs           : <tspan fill="#34d399">1</tspan></text>
+    <text x="45" y="334" fill="#e2e8f0">  * Last Run Status           : <tspan fill="#34d399">success</tspan></text>
+
+    <!-- Prompt 3 -->
+    <text x="45" y="365" fill="#38bdf8" font-weight="bold">PS C:\scraper&gt; </text>
+    <text x="175" y="365" fill="#f8fafc">python cli.py export --job quotes_sample --format csv</text>
+    <text x="45" y="388" fill="#34d399">Data exported successfully to: exports/job_1_20261025.csv</text>
+  </g>
+</svg>
