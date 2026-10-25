@@ -1,262 +1,262 @@
 # Automated Web Scraper with Scheduler
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.x-43B02A?logo=selenium&logoColor=white)](https://www.selenium.dev/)
-[![Celery](https://img.shields.io/badge/Celery-5.x-green?logo=celery&logoColor=white)](https://docs.celeryq.dev/)
-[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-4.x-43B02A?logo=selenium&logoColor=white)
+![Celery](https://img.shields.io/badge/Celery-5.x-green?logo=celery&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 
-An enterprise-ready, automated web scraping tool built with **Python**, **Selenium**, **BeautifulSoup4**, **Celery**, and **SQLite**.
+An automated web scraping tool built with **Python, Selenium, BeautifulSoup4, Celery, and SQLite**. It collects data from dynamic websites, schedules recurring scraping jobs, prevents duplicate records, stores results in a database, and exports datasets to CSV and JSON.
 
-Designed for scraping modern dynamic websites (Single Page Applications, JavaScript-heavy DOMs, infinite scrolling, AJAX pagination) on a periodic schedule, deduplicating records, storing them in SQLite, and exporting clean datasets to **CSV** or **JSON**.
+The project supports JavaScript-rendered pages, configurable CSS selectors, and two scheduling modes: a standalone local scheduler and an optional Celery-based distributed scheduler.
 
----
+## Features
 
-## 🏛️ System Architecture
+- **Dynamic scraping:** Selenium and headless Chrome handle JavaScript-rendered pages, explicit waits, and dynamic content.
+- **HTML parsing:** BeautifulSoup4 with lxml extracts structured data from rendered HTML.
+- **Duplicate prevention:** SHA-256 hashes help identify duplicate scraped records.
+- **SQLite storage:** Stores scraping jobs, execution history, metrics, and collected items.
+- **Automated scheduling:** Run recurring jobs using the standalone scheduler or Celery Beat and workers.
+- **Configurable scrapers:** Includes Quotes, e-commerce catalog, and generic CSS-selector-based scraping.
+- **Data export:** Export collected records to CSV or JSON.
+- **Command-line interface:** Initialize the database, manage jobs, run scrapes, inspect statistics, and export results.
+- **Testing:** Includes unit, integration, and live browser scraping tests.
+
+## Architecture
 
 ![Architecture Diagram](assets/architecture_diagram.svg)
 
-### Pipeline Flow
+### Data pipeline
 
-```mermaid
-flowchart LR
-    A["Dynamic Web Source\n(SPA / AJAX / JS)"] --> B["Selenium Headless Chrome\n(DOM Rendering & Waits)"]
-    B --> C["BeautifulSoup4 / lxml\n(Structured Extraction)"]
-    C --> D["Deterministic Hasher\n(SHA-256 Deduplication)"]
-    D --> E[("SQLite Database\n(jobs, runs, items)")]
-    E --> F["CSV / JSON Exporter\n(Tabular Datasets)"]
-    
-    subgraph Schedulers
-        G["Celery Beat + Redis"] -.-> B
-        H["Standalone Local Scheduler"] -.-> B
-    end
-```
+1. **Source website:** A dynamic website provides the content.
+2. **Browser automation:** Selenium loads the page and renders JavaScript.
+3. **HTML extraction:** BeautifulSoup4 and lxml parse the rendered page.
+4. **Deduplication:** SHA-256 hashes identify duplicate records.
+5. **Database:** SQLite stores items and execution history.
+6. **Export:** The exporter produces CSV or JSON files.
 
----
+The standalone scheduler runs locally without Redis. The optional distributed scheduling configuration uses Celery and Redis.
 
-## ✨ Key Features
+## Technology Stack
 
-1. **Hybrid Scraping Pipeline**:
-   - **Selenium**: Renders dynamic JavaScript, handles infinite scrolling, executes explicit element waits, and interacts with SPAs.
-   - **BeautifulSoup4**: High-speed, resilient parsing of rendered HTML, avoiding slow repetitive WebDriver IPC roundtrips.
-2. **Deterministic SHA-256 Deduplication**:
-   - Every scraped item is hashed to prevent duplicate entries across recurring scrape runs. Re-scraping the same page updates metadata without bloating your database.
-3. **Dual Scheduling Modes**:
-   - **Standalone Local Scheduler**: Zero-dependency local scheduler running directly in Python via the `schedule` engine (no Redis required).
-   - **Distributed Celery + Redis**: Production distributed architecture with Celery Worker & Beat scheduler.
-4. **Pre-built & Generic Dynamic Scrapers**:
-   - **Quotes to Scrape (Dynamic JS)**: Demonstration scraper for JavaScript-loaded quotes.
-   - **E-Commerce Catalog**: Demonstration scraper for product grids, prices, and stock statuses.
-   - **Dynamic Generic Scraper**: Configure any website on the fly by passing CSS selector rules via CLI or JSON!
-5. **Interactive CLI & Rich Reporting**:
-   - Built-in commands for `init`, `add-job`, `run`, `list-jobs`, `view-data`, `stats`, `export`, and scheduler management.
-6. **Multi-Format Export**:
-   - One-click export to CSV (flattening nested lists and attributes) or formatted JSON.
+| Technology | Purpose |
+|---|---|
+| Python | Application logic and orchestration |
+| Selenium | Browser automation and dynamic content rendering |
+| BeautifulSoup4 | HTML parsing and extraction |
+| lxml | Fast HTML parsing |
+| Celery | Distributed task execution |
+| Redis | Message broker for Celery |
+| SQLite | Persistent local storage |
+| Docker Compose | Containerized services |
+| pytest | Automated testing |
 
----
+## Project Structure
 
-## 🖥️ Terminal Interface
-
-![CLI Preview](assets/cli_preview.svg)
-
----
-
-## 📂 Project Structure
-
-```
+```text
 automated_web_scraper/
-├── config.py                 # Configuration settings (paths, Redis URLs, timeouts)
-├── database.py               # SQLite schema, migrations, queries, and deduplication
-├── exporter.py               # Exporter engine (CSV and JSON)
-├── celery_app.py             # Celery application & beat schedule configuration
-├── scheduler.py              # Standalone local scheduler engine
-├── cli.py                    # Unified Click CLI management tool
-├── docker-compose.yml        # Docker compose for Redis and containerized workers
-├── Dockerfile                # Container definition with Chromium & driver
-├── requirements.txt          # Python dependencies
 ├── core/
-│   ├── engine.py             # Browser automation manager (Selenium Chrome headless)
-│   ├── parser.py             # BeautifulSoup parsing and extraction helpers
+│   ├── engine.py
+│   ├── parser.py
 │   └── scrapers/
-│       ├── base.py           # Abstract BaseScraper
-│       ├── quotes_scraper.py # Quotes to Scrape (Dynamic JS) implementation
-│       ├── ecommerce_scraper.py # Product listing scraper
-│       └── dynamic_generic.py   # Config-driven generic dynamic scraper
-├── samples/                  # Sample extracted output datasets
-│   ├── quotes_sample.csv     # Scraped quotes sample (CSV)
-│   ├── quotes_sample.json    # Scraped quotes sample (JSON)
-│   ├── ecommerce_sample.csv  # Scraped books catalog (CSV)
-│   └── ecommerce_sample.json # Scraped books catalog (JSON)
-├── assets/                   # Architecture diagrams & visuals
+│       ├── base.py
+│       ├── quotes_scraper.py
+│       ├── ecommerce_scraper.py
+│       └── dynamic_generic.py
+├── tests/
+│   ├── test_database.py
+│   ├── test_e2e_live.py
+│   ├── test_exporter.py
+│   ├── test_parser.py
+│   └── test_scrapers.py
+├── assets/
 │   ├── architecture_diagram.svg
 │   └── cli_preview.svg
-├── tests/
-│   ├── test_database.py      # SQLite CRUD and deduplication tests
-│   ├── test_parser.py        # BeautifulSoup extraction tests
-│   ├── test_scrapers.py      # Scraper logic unit tests
-│   ├── test_exporter.py      # CSV and JSON export tests
-│   └── test_e2e_live.py      # End-to-end live browser scraping test
-└── verify_unattended_scheduling.py # Verification script for unattended scheduling
+├── samples/
+├── tasks/
+├── config.py
+├── database.py
+├── exporter.py
+├── celery_app.py
+├── scheduler.py
+├── cli.py
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
 ```
 
----
+*Note: This structure reflects the documented project layout. Verify the filenames and folders against your actual repository before publishing.*
 
-## 🚀 Quickstart Guide
+## Getting Started
 
-### 1. Install Dependencies
+### Prerequisites
 
-Ensure Python 3.10+ is installed:
+- Python 3.10 or later
+- Google Chrome or a compatible Chromium browser
+- Git
+
+For distributed scheduling, you'll also need Redis and a working Celery configuration. Docker can simplify setting up the required services.
+
+### 1. Clone the repository
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/singipurapudinesh-coder/automated-web-scraper.git
+cd automated-web-scraper
 ```
 
-### 2. Initialize Database & Seed Default Jobs
+### 2. Install dependencies
+
+```bash
+python -m venv .venv
+```
+
+Activate the environment on Windows:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 3. Initialize the database
 
 ```bash
 python cli.py init
 ```
 
-### 3. List Configured Jobs
+### 4. List available jobs
 
 ```bash
 python cli.py list-jobs
 ```
 
-### 4. Run a Scraping Job Immediately
+### 5. Run a scraping job
 
 ```bash
-# Run synchronously
 python cli.py run quotes_sample
-
-# Or dispatch to background Celery worker
-python cli.py run quotes_sample --celery
 ```
 
-### 5. Inspect Scraped Data & Statistics
+### 6. View collected data and statistics
 
 ```bash
-# View table preview in terminal
 python cli.py view-data --job quotes_sample --limit 5
-
-# View run statistics & execution history
 python cli.py stats --job quotes_sample
 ```
 
-### 6. Export Data to CSV or JSON
+### 7. Export results
+
+Export to CSV:
 
 ```bash
 python cli.py export --job quotes_sample --format csv
+```
+
+Export to JSON:
+
+```bash
 python cli.py export --job quotes_sample --format json
 ```
 
-Exported files are placed in `exports/` by default. See [`samples/`](samples/) for reference outputs.
+The CLI reports the output location of generated export files.
 
----
+## Scheduling
 
-## ⏱️ Scheduling & Unattended Automation
+### Option A: Standalone local scheduler
 
-### Mode A: Standalone Local Scheduler (Zero Redis Required)
-
-Best for single-machine setups or local development:
+Start the scheduler and trigger enabled jobs immediately:
 
 ```bash
-# Start scheduler and immediately trigger active jobs once
 python cli.py schedule --run-now
+```
 
-# Or run with a custom duration (e.g. 1 hour / 3600s)
+Run the scheduler with a duration, if supported by your configuration:
+
+```bash
 python cli.py schedule --duration 3600
 ```
 
-- Synchronizes automatically with SQLite whenever jobs are added or updated.
-- Executes each job at its configured interval unattended.
+Keep the scheduler process running for recurring jobs to execute.
 
-### Verified Unattended Execution
+### Option B: Celery and Redis
 
-Run the built-in recurring schedule test:
-
-```bash
-python verify_unattended_scheduling.py
-```
-
-This verifies that the scheduler triggers recurring intervals automatically with zero manual intervention:
-
-```
-[3] Inspection Results from SQLite:
-    Total Recorded Runs: 2
-    * Run #1 (Run ID: 9)  | Status: success | Start: 2026-10-25 14:00:41 | Items: 10
-    * Run #2 (Run ID: 10) | Status: success | Start: 2026-10-25 14:00:59 | Items: 10
-
-[4] Interval Verification:
-    Delta between Run #1 and Run #2: 18.0 seconds (Target: ~12s)
->>> SUCCESS: Unattended recurring scheduling VERIFIED! <<<
-```
-
----
-
-## 🐳 Docker & Celery Deployment
-
-### Mode B: Distributed Celery + Redis (Production)
-
-For distributed production deployments where scraping tasks are decoupled across worker nodes:
-
-#### Option 1: Docker Compose
-
-Spin up Redis, Celery Worker, and Celery Beat in one command:
+Start the services using Docker Compose:
 
 ```bash
 docker compose up -d
 ```
 
-To run the standalone scheduler in Docker without Redis:
+Review your `docker-compose.yml` to confirm which services and profiles are configured.
+
+For native Celery execution on Windows, the project documents these commands:
 
 ```bash
-docker compose --profile standalone up -d
+python cli.py worker
 ```
 
-#### Option 2: Native Celery on Windows
-
-1. Ensure Redis is running (`redis://localhost:6379/0`).
-2. Start the Celery Worker (automatically applies `--pool=solo` on Windows):
-   ```bash
-   python cli.py worker
-   ```
-3. In a separate terminal, start Celery Beat:
-   ```bash
-   python cli.py beat
-   ```
-
----
-
-## 🔧 Adding Custom Scrapers
-
-### Using the Generic Dynamic Scraper (No Code Required)
-
-Configure new sites via JSON selector rules:
+In a separate terminal:
 
 ```bash
-python cli.py add-job \
-  --name tech_news \
-  --url "https://news.ycombinator.com" \
-  --type dynamic_generic \
-  --interval 30 \
-  --config-json '{"container_selector": ".athing", "fields": {"title": ".titleline > a", "link": {"selector": ".titleline > a", "attribute": "href"}}}'
+python cli.py beat
 ```
 
----
+Ensure Redis is running and the Celery broker URL is configured correctly before starting the worker and scheduler.
 
-## 🧪 Testing
+## Adding a Custom Scraper
 
-Run all unit tests and live dynamic scraping verification:
+The generic scraper supports configuration through CSS selectors. For example, the following command registers a Hacker News scraping job:
+
+```bash
+python cli.py add-job --name tech_news --url "https://news.ycombinator.com" --type dynamic_generic --interval 30 --config-json '{"container_selector": ".athing", "fields": {"title": ".titleline > a", "link": {"selector": ".titleline > a", "attribute": "href"}}}'
+```
+
+Confirm the accepted options and configuration format with:
+
+```bash
+python cli.py add-job --help
+```
+
+Always check a target website's terms, robots.txt guidance, and applicable laws before scraping. Use reasonable request rates and avoid collecting personal or sensitive information without authorization.
+
+## Testing
+
+Run the test suite:
 
 ```bash
 python -m pytest tests -v
 ```
 
-All 11 tests execute in ~6.5s, verifying:
-- SQLite transactions & schema integrity
-- SHA-256 deduplication
-- BeautifulSoup text and list extraction
-- Dynamic scrapers (Quotes, E-Commerce, Generic)
-- CSV and JSON exporters
-- Live headless Chrome end-to-end rendering
+The project test run reported **11 tests passed**, including:
+
+- SQLite job management and deduplication
+- HTML parser functionality
+- Generic and pre-built scrapers
+- CSV and JSON exports
+- Live headless browser scraping
+
+Test results can vary depending on browser availability, network connectivity, and website changes.
+
+## Sample Outputs
+
+If included in the repository, the `samples/` directory can contain example CSV and JSON datasets generated by the scrapers.
+
+## Future Improvements
+
+- Add a web dashboard for monitoring jobs and scraping history.
+- Add configurable retry policies and failure notifications.
+- Support additional storage backends.
+- Add metrics and structured logging.
+- Provide deployment examples for a persistent server environment.
+
+## License
+
+Choose and add a license file before describing this project as open source under a particular license.
+
+---
+
+**Author:** Singipurapu Dinesh
+
